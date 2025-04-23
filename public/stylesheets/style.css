@@ -1,0 +1,43 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #735DA5;
+  color: #D3C5E5  ;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  text-align: center;
+  padding: 15px;
+  background-color: #503f77;
+}
+
+a {
+  color: #D3C5E5;
+  text-decoration: none;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+#navbar > nav {
+  padding: 10px;
+
+}
+#navbar > nav > ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  justify-content:center;
+}
+
+#navbar > nav > ul > li {
+  margin: 0 10px;
+}
