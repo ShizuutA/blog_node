@@ -1,15 +1,18 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px poppins, sans-serif;
   background-color: #735DA5;
   color: #D3C5E5  ;
 }
 
 header {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 2fr 3fr;
   text-align: center;
   padding: 15px;
-  background-color: #503f77;
+}
+
+header > h1 {
+  font-family: 'Fleur De Leah', cursive;
 }
 
 a {
@@ -40,4 +43,20 @@ main {
 
 #navbar > nav > ul > li {
   margin: 0 10px;
+}
+
+#blog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#error-message {
+  color: red;
+  font-weight: bold;
+}
+#success-message {
+  color: green;
+  font-weight: bold;
 }

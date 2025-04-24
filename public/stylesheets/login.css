@@ -1,0 +1,72 @@
+#login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-container > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #735DA5;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#login-container > form > div > input[type="text"],
+#login-container > form > div > input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #D3C5E5;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.inputbox {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 1em 0 1em 0;
+    max-width: 190px;
+    position: relative;
+  }
+  
+  .inputbox input {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+  }
+  
+  .inputbox label {
+    font-size: 100%;
+    position: absolute;
+    top: 4px;
+    left: 0;
+    padding: 0.8em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: #D3C5E5;
+  }
+  
+  .inputbox :is(input:focus, input:valid)~label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    background-color: #735DA5;
+  }
+  
+  .inputbox :is(input:focus, input:valid) {
+    border-color: rgb(150, 150, 200);
+  }

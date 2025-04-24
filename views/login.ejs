@@ -2,8 +2,49 @@
 <html>
     <head>
         <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/login.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1><%= title %></h1>
+        <header>
+            <h1><%= title %></h1>
+            <div id="navbar">
+                <nav>
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/register">Register</a></li>
+                </ul>
+              </nav>
+              </div>
+        </header>
+        <main>
+            <div id="login-container">  
+                <form action="/login" method="POST">
+                    <div class="inputbox">
+                        <input type="text" id="username" name="username" required>
+                        <label for="username">Username</label>
+                        <br>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" id="password" name="password" required>
+                        <label for="password">Password</label>
+                        <br>
+                    </div>
+                    <div class="checkbox_container">
+                        <label for="remember-me">Remember Me:</label>
+                        <input type="checkbox" id="remember-me" name="remember-me">
+                        <br>
+                    </div>
+                    
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+        
     </body>
 </html>

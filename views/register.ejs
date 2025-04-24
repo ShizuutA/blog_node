@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/register.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1><%= title %></h1>
+            <div id="navbar">
+                <nav>
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/login">Login</a></li>
+                </ul>
+              </nav>
+              </div>
+        </header>
+        <main>
+            <div id="register-container">  
+                <form action="/register" method="POST">
+                    <div class="inputbox">
+                        <input type="text" id="username" name="username" autocomplete="off" required>
+                        <label for="username">Username</label>
+                        <br>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" id="password" name="password" autocomplete="off" required>
+                        <label for="password">Password</label>
+                        <br>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" id="confirmpassword" name="confirmpassword" autocomplete="off" required>
+                        <label for="confirmpassword">Confirm Password</label>
+                        <br>
+                    </div>                                       
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+            <% if (locals.error) { %>
+            <div id="error-message">                
+                    <p><%= error %></p>                
+            </div>
+            <% } %>
+            <% if (locals.success) { %>
+            <div id="success-message">
+                    <p><%= success %></p>     
+            </div> 
+            <% } %>
+        </main>
+        <footer>
+
+        </footer>
+        
+    </body>
+</html>
