@@ -1,8 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var app = express();
-
-var port = 3000;
 
 var sha1 = require('js-sha1');
 
