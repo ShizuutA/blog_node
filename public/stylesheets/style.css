@@ -1,9 +1,8 @@
 body {
   font: 14px poppins, sans-serif;
-  background-color: #735DA5;
-  color: #D3C5E5  ;
+  background-color: white;
+  color: #735DA5  ;
 }
-
 header {
   display: grid;
   grid-template-columns: 2fr 3fr;
@@ -16,7 +15,7 @@ header > h1 {
 }
 
 a {
-  color: #D3C5E5;
+  color: #735DA5;
   text-decoration: none;
 }
 

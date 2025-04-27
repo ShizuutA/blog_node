@@ -9,7 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #735DA5;
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
 }
@@ -20,7 +20,7 @@
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
-    border: 1px solid #D3C5E5;
+    border: 1px solid #735DA5;
 }
 
 main {
@@ -56,7 +56,7 @@ main {
     margin-left: 0.5em;
     pointer-events: none;
     transition: all 0.3s ease;
-    color: #D3C5E5;
+    color: #735DA5;
   }
   
   .inputbox :is(input:focus, input:valid)~label {
@@ -64,7 +64,7 @@ main {
     margin: 0em;
     margin-left: 1.3em;
     padding: 0.4em;
-    background-color: #735DA5;
+    background-color: white;
   }
   
   .inputbox :is(input:focus, input:valid) {
@@ -77,7 +77,8 @@ main {
     border-radius: 50px;
     cursor: pointer;
     border: 0;
-    background-color: white;
+    background-color: #735DA5;
+    color: hsl(0, 0%, 100%);
     box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -97,7 +98,7 @@ main {
     background-color: #685b79;
     color: hsl(0, 0%, 100%);
     box-shadow: #685b79 0px 0px 0px 0px;
-    transform: translateY(10px);
+    transform: translateY(2px);
     transition: 100ms;
   }
   
