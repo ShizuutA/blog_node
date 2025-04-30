@@ -12,9 +12,6 @@ var connection = mysql.createConnection({
 });
 
 
-        
-
-
 router.get('/', function(req, res, next) {
 
     res.render('register', { title: 'Register' });
@@ -34,14 +31,7 @@ router.post('/', function(req, res) {
         });
     }
     else {
-        connection.connect(function(err) {
-            if (err) {
-                console.error('Error connecting: ' + err.stack);
-                return;
-            }
-            console.log('Connected as id ' + connection.threadId);
-
-            connection.query('SELECT  username FROM Users WHERE username = ?', [username], function(error, results, fields) {
+         connection.query('SELECT  username FROM Users WHERE username = ?', [username], function(error, results, fields) {
                 if (error) {
                     console.error('Error executing query: ' + error.stack);
                     return res.status(500).send('Error executing query');
@@ -66,8 +56,7 @@ router.post('/', function(req, res) {
                     });
                 }
             });
-        });
-    }
-});
-
+            connection.release;
+        }
+    });
 module.exports = router;

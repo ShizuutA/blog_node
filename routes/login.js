@@ -22,13 +22,6 @@ router.post('/', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    connection.connect(function(err) {
-        if (err) {
-            console.error('Error connecting: ' + err.stack);
-            return;
-        }
-        console.log('Connected as id ' + connection.threadId);
-
         password = sha1(password);
 
         connection.query('SELECT * FROM Users WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
@@ -39,6 +32,10 @@ router.post('/', function(req, res) {
 
             if (results.length > 0) {
                 session.user = username;
+                console.log(results);
+                if (results[0].rights == "Admin") {
+                   session.admin = true;
+                }
                 res.redirect('/');
             } else {
                 res.status(401).render('login', {
@@ -46,8 +43,10 @@ router.post('/', function(req, res) {
                     error: 'Invalid username or password'
                 });
             }
+            
         });
+        connection.release;
+        
     });
-});
 
 module.exports = router;

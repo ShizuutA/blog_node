@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>The Rabbit Hole</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/home.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
-      <h1><%= title %></h1> 
+      <div>
+        <h1>The Rabbit Hole</h1>
+      </div> 
+      <% if (user) { %>
+      <div id="user-info">
+        <p><%= user %></p> <br>
+        <form action="/logout" method="POST">
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+      <% } %>
       <div id="navbar">
         <nav>
         <ul>
-          <li><a href="/">Home</a></li>
+          <% if (!user) { %>
           <li><a href="/login">Login</a></li>
           <li><a href="/register">Register</a></li>
+          <% } %>
+          <li><a href="/blogs">Blogs</a></li>
+          <% if (admin) { %>
+          <li><a href="/CreatePost">Create Post</a></li>
+          <% } %>
         </ul>
       </nav>
       </div>
+     
+      <hr>
     </header>
     <main>
       <div id="blog-container">

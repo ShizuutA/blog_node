@@ -10,6 +10,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
+var logoutRouter = require('./routes/logout');
+var createPostRouter = require('./routes/createPost');
+var uploadRouter = require('./routes/upload');
 
 var app = express();
 
@@ -27,9 +30,15 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/logout', logoutRouter);
+app.use('/createPost', createPostRouter);
+app.use('/upload', uploadRouter);
 
 app.use(session({
-  secret: 'secret'
+  secret: 'secret',
+  user: false,
+  admin: false,
+  cookie: { secure: true }
 }));
 
 
