@@ -39,6 +39,10 @@ router.post('/', function(req, res) {
 
             if (results.length > 0) {
                 session.user = username;
+                console.log(results);
+                if (results[0].rights == "Admin") {
+                   session.admin = true;
+                }
                 res.redirect('/');
             } else {
                 res.status(401).render('login', {

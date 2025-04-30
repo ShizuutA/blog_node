@@ -24,26 +24,24 @@
       <div id="navbar">
         <nav>
         <ul>
-          <% if (!user) { %>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/register">Register</a></li>
-          <% } %>
+          <li><a href="/">Home</a></li>  
           <li><a href="/blogs">Blogs</a></li>
-          <% if (admin) { %>
-          <li><a href="/CreatePost">Create Post</a></li>
-          <% } %>
         </ul>
       </nav>
       </div>
-     
       <hr>
     </header>
     <main>
-      <div id="blog-container">
-        <h2>Blog Posts</h2>
-        <ul>
-        </ul>
-      </div>
+        <div>
+            <h2>Create a New Post</h2>
+            <form action="/createPost" method="POST">
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title" required><br><br>
+                <label for="content">Content:</label><br>
+                <textarea id="content" name="content" rows="4" cols="50" required></textarea><br><br>
+                <button type="submit">Create Post</button>
+            </form>
+        </div>
     </main>
     <footer>
       
