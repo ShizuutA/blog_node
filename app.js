@@ -14,6 +14,7 @@ var logoutRouter = require('./routes/logout');
 var createPostRouter = require('./routes/createPost');
 var uploadRouter = require('./routes/upload');
 var postsRouter = require('./routes/posts');
+var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/logout', logoutRouter);
 app.use('/createPost', createPostRouter);
 app.use('/upload', uploadRouter);
 app.use('/posts', postsRouter);
+app.use('/users', usersRouter);
 
 app.use(session({
   secret: 'secret',

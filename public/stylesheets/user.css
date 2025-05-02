@@ -1,0 +1,12 @@
+#user-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+#left-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

@@ -3,7 +3,8 @@ DBname = Blog_Romain
 table1 = Users {
     username varchar(255) PRIMARY KEY NOT NULL,
     password (sha1) : varchar(255) NOT NULL,
-    rights ENUM('Member', 'Admin') DEFAULT 'Member'
+    rights ENUM('Member', 'Admin') DEFAULT 'Member',
+    about mediumtext ;
 }
 
 table2 = Posts {

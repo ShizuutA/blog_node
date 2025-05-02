@@ -3,8 +3,7 @@
   <head>
     <title>The Rabbit Hole</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="/stylesheets/home.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="/stylesheets/user.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
   </head>
@@ -13,7 +12,7 @@
       <div>
         <h1>The Rabbit Hole</h1>
       </div> 
-      <% if (user) { %>
+      <% if (username) { %>
       <div id="user-info">
         <p><%= user %></p> <br>
         <form action="/logout" method="POST">
@@ -24,11 +23,11 @@
       <div id="navbar">
         <nav>
         <ul>
-          <% if (!user) { %>
+          <li><a href="/">Home</a></li>
+          <% if (!username) { %>
           <li><a href="/login">Login</a></li>
           <li><a href="/register">Register</a></li>
           <% } %>
-          <li><a href="/posts">Posts</a></li>
           <% if (admin) { %>
           <li><a href="/CreatePost">Create Post</a></li>
           <% } %>
@@ -40,17 +39,14 @@
     </header>
     <main>
       <div></div>
-      <div id="blog-container">
-        <h2>Latest Posts</h2>
-        <ul>
-          <% posts.forEach(post => { %>
-          <li class="blog-post" id="post-1">
-            <h3><%= post['title']  %></h3>
-            <p><%= post['preview']  %></p>
-            <a href="/posts/<%= post['ID']%>">Read more</a>
-          </li>
-          <% }) %>
-        </ul>
+      <div id="user-container">
+        <div id="left-column">
+          <img src="" alt="">
+          <h2><%= user['username']  %></h2>
+          <% if (user['about']) {%>
+            <p><%= user['about']  %></p>
+          <% } %>
+        </div>
       </div>
     </main>
     <footer>
