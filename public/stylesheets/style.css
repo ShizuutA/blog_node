@@ -17,6 +17,7 @@ header {
 header > div > h1 {
   font-size: 2.5em;
   font-family: 'Fleur De Leah', cursive;
+  word-spacing: 6px;
 }
 
 a {
@@ -68,9 +69,15 @@ header > hr {
 #blog-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
 }
+
+#blog-container > h2 {
+  font-size: 2em;
+  margin: 20px 0;
+  font-family: 'Fleur De Leah', cursive;
+  word-spacing: 6px;
+}
+
 
 #error-message {
   color: red;
@@ -79,4 +86,47 @@ header > hr {
 #success-message {
   color: green;
   font-weight: bold;
+}
+
+#user-info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 0px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  color: #444;
+}
+
+  #user-info > p {
+      font-size: 1.2em;
+      font-weight: 600;
+  }
+
+  #user-info button {
+      padding: 8px 20px;
+      font-size: 1em;
+      background-color: #735DA5;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+  }
+  
+      #user-info button:hover {
+          background-color: #735DA5;
+          transform: scale(1.05);
+      }
+
+header > hr {
+  width: 70%;
+  margin: 25px auto;
+  height: 2px;
+  background-color: #735DA5   ;
+  border: none;
+  opacity: 0.8;
 }

@@ -1,16 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
+const dbConfig = require("../config/db.config.js");
+
 var session = require('express-session');
 
 var sha1 = require('js-sha1');
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'Blog_Romain'
+    host: dbConfig.HOST,
+    user: dbConfig.USER,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DB
 });
 
 router.get('/', function(req, res, next) {
@@ -22,13 +24,6 @@ router.post('/', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    connection.connect(function(err) {
-        if (err) {
-            console.error('Error connecting: ' + err.stack);
-            return;
-        }
-        console.log('Connected as id ' + connection.threadId);
-
         password = sha1(password);
 
         connection.query('SELECT * FROM Users WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
@@ -39,7 +34,6 @@ router.post('/', function(req, res) {
 
             if (results.length > 0) {
                 session.user = username;
-                console.log(results);
                 if (results[0].rights == "Admin") {
                    session.admin = true;
                 }
@@ -50,8 +44,10 @@ router.post('/', function(req, res) {
                     error: 'Invalid username or password'
                 });
             }
+            
         });
+        connection.release;
+        
     });
-});
 
 module.exports = router;
