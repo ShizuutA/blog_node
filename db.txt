@@ -29,3 +29,12 @@ table3 = Reactions {
     fire int,
     star int
 }
+
+table5 = commentaires {
+    ID int PRIMARY key AUTO_INCREMENT not null,
+    post_id int not null,
+    user varchar(255) not null,
+    content mediumtext not null,
+    upvote int DEFAULT 0,
+    downvote int DEFAULT 0
+}

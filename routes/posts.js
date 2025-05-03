@@ -30,9 +30,30 @@ connection.query('SELECT * FROM posts ORDER BY ID', function (error, results, fi
                 user = false;
                 admin = false;
             }
+            connection.query('SELECT * FROM commentaires WHERE post_id = ?', [post.ID], function (error, results, fields) {
+                if (error) throw error;
+                if (results.length == 0) {
+                    post_comments = false;
+                }
+                else {
+                    post_comments = results;
+                }
+            });
+            res.render('postmodel', { post: post, user: user , admin: admin, comments: post_comments });
+
+            router.post('/' + post.ID, function(req, res, next) {
+                if (session.user) {
+                    user = session.user;
+                } 
+                else {
+                res.redirect('/posts/' + post.ID);
+                }
     
-            
-            res.render('postmodel', { post: post, user: user , admin: admin, });
+                connection.query('INSERT INTO commentaires (post_id, user, content) VALUES (?, ?, ?)', [post.ID, user, req.body.comment], function (error, results, fields) {
+                    if (error) throw error;
+                    res.redirect('/posts/' + post.ID);
+                });
+             });
         });
     });
 });
