@@ -4,6 +4,7 @@
     <title>The Rabbit Hole</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="/stylesheets/home.css" />
+    <link rel="stylesheet" href="/stylesheets/user-panel.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
   </head>
@@ -14,10 +15,20 @@
       </div> 
       <% if (user) { %>
       <div id="user-info">
-        <p><%= user %></p> <br>
-        <form action="/logout" method="POST">
-          <button type="submit">Logout</button>
-        </form>
+        <button id="user-nav-btn"><img src="<%= pfpdata %>" alt="<%= user  %>" class="pfp" ></button> <br>
+        <nav id="user-nav" >
+          <ul>
+            <li id="user-pfp"><img src='<%= pfpdata %>' alt="<%= user %>" class="pfp" /></li>
+            <li>
+              <form action="/logout" method="POST">
+                <button type="submit">Logout</button>
+              </form>
+            </li>
+            <li><a href="/users/<%= user %>">Profile</a></li>
+            <% if (admin) { %>
+              <li><a href="/CreatePost">Create Post</a></li>
+            <% } %>
+        </nav>
       </div>
       <% } %>
       <div id="navbar">
@@ -27,9 +38,6 @@
           <% if (!user) { %>
           <li><a href="/login">Login</a></li>
           <li><a href="/register">Register</a></li>
-          <% } %>
-          <% if (admin) { %>
-          <li><a href="/CreatePost">Create Post</a></li>
           <% } %>
         </ul>
       </nav>
@@ -53,7 +61,7 @@
       </div>
     </main>
     <footer>
-      
     </footer>
+    <script rel="js" src="/javascripts/user-side-pannel.js"></script>
   </body>
 </html>

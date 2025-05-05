@@ -40,7 +40,7 @@
   }
 
 
-  form button {
+  .form-container button {
     margin-left: 20px;
     padding: 17px 40px;
     border-radius: 50px;
@@ -55,12 +55,12 @@
     transition: all 0.5s ease;
   }
   
-  form button:hover {
+  .form-container button:hover {
     background-color: #685b79;
     color: hsl(0, 0%, 100%);
   }
 
-  form button:active {
+  .form-container button:active {
     background-color: #685b79;
     color: hsl(0, 0%, 100%);
     transform: translateY(2px);

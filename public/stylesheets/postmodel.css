@@ -42,7 +42,7 @@ main {
 
 
 
-.textareabox {
+.form-container {
   font-family: 'Segoe UI', sans-serif;
   margin: 1em 0 1em 0;
   margin-left: 16px;
@@ -50,7 +50,7 @@ main {
   position: relative;
 }
 
-  .textareabox label {
+  .form-container  label {
     font-size: 100%;
     position: absolute;
     top: 2px;
@@ -62,7 +62,7 @@ main {
     color: #735DA5;
   }
 
-  .textareabox :is(textarea:focus, textarea:valid)~label {
+  .form-container :is(textarea:focus, textarea:valid)~label {
     transform: translateY(-50%) scale(.9);
     margin: 0em;
     margin-left: 1.3em;
@@ -70,11 +70,11 @@ main {
     background-color: white;
   }
 
-  .textareabox :is(textarea:focus, textarea:valid) {
+  .form-container :is(textarea:focus, textarea:valid) {
     border-color: rgb(150, 150, 200);
   }
 
-  .textareabox textarea {
+  .form-container textarea {
     font-size: 100%;
     padding: 0.8em;
     outline: none;
@@ -86,7 +86,7 @@ main {
     resize: none;
   }
 
-button {
+#comment-form button {
   margin-left: 20px;
   padding: 10px 30px;
   border-radius: 50px;
@@ -101,12 +101,12 @@ button {
   transition: all 0.5s ease;
 }
 
-  button:hover {
-    background-color: #685b79;
-    color: hsl(0, 0%, 100%);
-  }
+  #comment-form button:hover {
+      background-color: #685b79;
+      color: hsl(0, 0%, 100%);
+    }
 
-  button:active {
+  #comment-form button:active {
     background-color: #685b79;
     color: hsl(0, 0%, 100%);
     transform: translateY(2px);

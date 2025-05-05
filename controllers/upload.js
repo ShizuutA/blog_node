@@ -1,9 +1,36 @@
 const fs = require("fs");
 
-const db = require("../models");
-const Image = db.images;
+const sha1 = require('js-sha1');
 
-const uploadFiles = async (req, res) => {
+const generateAvatar = require("../middleware/generateAvatar");
+
+const db = require("../models");
+const Users = db.users;
+
+
+const createUser = async (req, res) => {
+  const { username, password, confirmpassword } = req.body;
+
+  if (password !== confirmpassword) {
+    return res.status(400).json({ message: "Passwords do not match" });
+  }
+  password = sha1(password)
+  let pfpdata = generateAvatar(username);
+  try {
+    const user = await Users.create({
+      username: username,
+      password: password,
+      pfpdata: pfpdata,
+    });
+
+    res.status(201).json({ message: "User created successfully", user });
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).json({ message: "Error creating user" });
+  }
+}
+
+const uploadPfp = async (req, res, username) => {
   try {
     console.log(req.file);
 
@@ -11,13 +38,17 @@ const uploadFiles = async (req, res) => {
       return res.send(`You must select a file.`);
     }
 
-    Image.create({
-      type: req.file.mimetype,
-      name: req.file.originalname,
-      data: fs.readFileSync(
-        __basedir + "/resources/static/assets/uploads/" + req.file.filename
-      ),
-    }).then((image) => {
+    await Users.update(
+      {
+        pfpname: req.file.originalname,
+        pfpdata: fs.readFileSync(
+          __basedir + "/resources/static/assets/uploads/" + req.file.filename
+        ),
+      },
+      {
+        where: { username: username },
+      }
+    ).then((image) => {
       fs.writeFileSync(
         __basedir + "/resources/static/assets/tmp/" + image.name,
         image.data
@@ -32,5 +63,5 @@ const uploadFiles = async (req, res) => {
 };
 
 module.exports = {
-  uploadFiles,
+  uploadPfp,
 };

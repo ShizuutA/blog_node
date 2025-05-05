@@ -16,16 +16,20 @@
       </div> 
       <% if (user) { %>
       <div id="user-info">
-        <button id="user-nav-btn"><p><%= user %></p></button> <br>
+        <button id="user-nav-btn"><img src="<%= pfpdata %>" alt="<%= user  %>" class="pfp" ></button> <br>
         <nav id="user-nav" >
           <ul>
-            <li><p><%= user %></p></li>
+            <li id="user-pfp"><img src='<%= pfpdata %>' alt="<%= user %>" class="pfp" /></li>
+            <li>
+              <form action="/logout" method="POST">
+                <button type="submit">Logout</button>
+              </form>
+            </li>
             <li><a href="/users/<%= user %>">Profile</a></li>
-          <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
-          </form>
+            <% if (admin) { %>
+              <li><a href="/CreatePost">Create Post</a></li>
+            <% } %>
         </nav>
-        
       </div>
       <% } %>
       <div id="navbar">
@@ -36,9 +40,6 @@
           <li><a href="/register">Register</a></li>
           <% } %>
           <li><a href="/posts">Posts</a></li>
-          <% if (admin) { %>
-          <li><a href="/CreatePost">Create Post</a></li>
-          <% } %>
         </ul>
       </nav>
       </div>

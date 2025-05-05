@@ -47,7 +47,7 @@ router.post("/", upload.single("image"), function(req, res) {
                 console.error('Error executing query: ' + error.stack);
                 return res.status(500).send('Error executing query');
             }
-            connection.query('SELECT id FROM Posts desc limit 1', function(error, results) {
+            connection.query('SELECT id FROM Posts order by id desc limit 1', function(error, results) {
                 if (error) {
                     console.error('Error executing query: ' + error.stack);
                     return res.status(500).send('Error executing query');

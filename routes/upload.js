@@ -4,6 +4,6 @@ var router = express.Router();
 var uploadController = require('../controllers/upload');
 var upload = require('../middleware/upload');
 
-router.post("/", upload.single("file"), uploadController.uploadFiles);
+router.post("/", upload.single("file"), uploadController.uploadPfp);
 
-module.exports = router; 
+module.exports = router;

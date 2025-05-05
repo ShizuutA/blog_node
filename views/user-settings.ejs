@@ -3,11 +3,10 @@
   <head>
     <title>The Rabbit Hole</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="/stylesheets/home.css" />
-    <link rel="stylesheet" href="/stylesheets/createPost.css" />
-    <link rel="stylesheet" href="/stylesheets/form.css" />
+    <link rel="stylesheet" href="/stylesheets/user.css" />
     <link rel="stylesheet" href="/stylesheets/user-panel.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="/stylesheets/form.css" />
+    <link rel="stylesheet" href="/stylesheets/user-settings.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
   </head>
@@ -16,18 +15,21 @@
       <div>
         <h1>The Rabbit Hole</h1>
       </div> 
-      <% if (user) { %>
+      <% if (username) { %>
         <div id="user-info">
-          <button id="user-nav-btn"><img src="<%= pfpdata %>" alt="<%= user  %>" class="pfp" ></button> <br>
+          <button id="user-nav-btn"><img src="<%= pfpdata %>" alt="<%= username  %>" class="pfp" ></button> <br>
           <nav id="user-nav" >
             <ul>
-              <li id="user-pfp"><img src='<%= pfpdata %>' alt="<%= user %>" class="pfp" /></li>
+              <li id="user-pfp"><img src='<%= pfpdata %>' alt="<%= username %>" class="pfp" /></li>
               <li>
                 <form action="/logout" method="POST">
                   <button type="submit">Logout</button>
                 </form>
               </li>
-              <li><a href="/users/<%= user %>">Profile</a></li>
+              <li><a href="/users/<%= username %>">Profile</a></li>
+              <% if (admin) { %>
+                <li><a href="/CreatePost">Create Post</a></li>
+              <% } %>
           </nav>
           
         </div>
@@ -35,35 +37,36 @@
       <div id="navbar">
         <nav>
         <ul>
-          <li><a href="/">Home</a></li>  
-          <li><a href="/blogs">Blogs</a></li>
+          <li><a href="/">Home</a></li>
+          <% if (!username) { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          <% } %>
         </ul>
       </nav>
       </div>
+     
       <hr>
     </header>
     <main>
-        <div>
-            <h2>Create a New Post</h2>
+      <div></div>
+      <div id="user-container">
+        <div id="left-column">
+          <img src="<%= user['pfpdata'] %>" alt="<%= user['username']  %>" class="pfp_info" id="user-pfp_info" />
+          <h2><%= user['username']  %></h2>
+          <p><%= user['rights']  %></p>
+          <% if (user['about']) {%>
+            <p><%= user['about']  %></p>
+          <% } %>
         </div>
         <div class="form-container">
-            <form action="/createPost" enctype="multipart/form-data" method="POST">
-              <div class="inputbox">
-                <input type="text" id="title" name="title" required>
-                <label for="title">Title</label>
-                <br>
-              </div>
-              <div class="textareabox">
-                <textarea id="content" name="content" rows="10" cols="200" spellcheck='on' required></textarea>
-                <label for="content">Content</label>
-                <br>
-              </div>
-              <div class="textareabox">
-                <textarea id="preview" name="preview" rows="10" cols="200" spellcheck='on' required></textarea>
-                <label for="preview">Preview</label>
-                <br>
-              </div>
-              <div class="imgbox">
+          <h2>Settings</h2>
+          <form action="/users/<%= user['username'] %>/settings" method="POST" enctype="multipart/form-data">
+            <div class="textareabox">
+            <textarea name="about" id="about" rows="4" cols="50"><%= user['about']  %></textarea>
+            <label for="about">About</label><br>
+            </div>
+            <div class="imgbox">
                 <label for="image" class="custum-file-upload">
                 <div class="icon">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path> </g></svg>
@@ -71,18 +74,17 @@
                   <div class="text">
                      <span>Click to upload image</span>
                      </div>
-                     <input type="file" id="image" name="image" accept="image/*" multiple>
+                     <input type="file" id="image" name="image" accept="image/*" unique="true" />
                   </label>                  
                 <br>
               </div>
               <div class="preview-images">
-                
               </div>
-              <br>
-                <button type="submit">Create Post</button>
-            </form>
-            
+            <button type="submit">Save</button>
+          </form>
+
         </div>
+      </div>
     </main>
     <footer>
       

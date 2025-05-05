@@ -38,8 +38,9 @@ connection.query('SELECT * FROM posts ORDER BY ID', function (error, results, fi
                 else {
                     post_comments = results;
                 }
+           
+                res.render('postmodel', { post: post, user: user , admin: admin, comments: post_comments }); 
             });
-            res.render('postmodel', { post: post, user: user , admin: admin, comments: post_comments });
 
             router.post('/' + post.ID, function(req, res, next) {
                 if (session.user) {

@@ -34,6 +34,12 @@ router.post('/', function(req, res) {
 
             if (results.length > 0) {
                 session.user = username;
+                if (results[0].pfpdata) {
+                    session.pfpdata = results[0].pfpdata;
+                }
+                else {
+                    session.pfpdata = '';
+                }
                 if (results[0].rights == "Admin") {
                    session.admin = true;
                 }

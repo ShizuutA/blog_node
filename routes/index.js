@@ -15,6 +15,9 @@ var connection = mysql.createConnection({
 router.get('/', function(req, res, next) {
   if (session.user) {
     user = session.user;
+    if (session.pfpdata) {
+      pfpdata = session.pfpdata;
+    }
     if (session.admin) {
       admin = session.admin;
     }
@@ -25,11 +28,12 @@ router.get('/', function(req, res, next) {
   else {
     user = false;
     admin = false;
+    pfpdata = '';
   }
 
   connection.query('SELECT * FROM posts ORDER BY ID DESC limit 2', function (error, results, fields) {
     if (error) throw error;
-    res.render('index', { title: 'Home', posts: results, user: user , admin: admin });
+    res.render('index', { title: 'Home', posts: results, user: user , admin: admin , pfpdata: pfpdata});
   });
 }
 );
