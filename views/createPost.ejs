@@ -125,6 +125,19 @@
               });
             };
           };
+        let form_container = document.querySelector('.form-container');
+        form_container.addEventListener('submit', async function(e) {
+          const files = e.target.image.files;
+          if (files.length > 3) {
+            e.preventDefault();
+            alert('You can only upload a maximum of 2 images.');
+          }
+          if (files.length > 0) {
+            for (const file of files) {
+                data.append('image', file);
+              }
+            }
+        });
 
     </script>
     <script rel="js" src="/javascripts/user-side-pannel.js"></script>

@@ -56,7 +56,7 @@
           <% if (user['about']) {%>
             <p><%= user['about']  %></p>
           <% } %>
-          <% if (ownpage) { %>
+          <% if (userOwnPage) { %>
             <div class="profile-settings" >
               <a href="/users/<%= user['username'] %>/settings" >Edit profile</a>
             </div>
