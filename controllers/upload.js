@@ -10,20 +10,20 @@ const Users = db.users;
 
 const createUser = async (req, res) => {
   const { username, password, confirmpassword } = req.body;
+  const hashedPassword = sha1(password);
 
   if (password !== confirmpassword) {
     return res.status(400).json({ message: "Passwords do not match" });
   }
-  password = sha1(password)
   let pfpdata = generateAvatar(username);
   try {
     const user = await Users.create({
       username: username,
-      password: password,
+      password: hashedPassword,
       pfpdata: pfpdata,
     });
 
-    res.status(201).json({ message: "User created successfully", user });
+    res.redirect("/login");
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ message: "Error creating user" });
@@ -64,4 +64,5 @@ const uploadPfp = async (req, res, username) => {
 
 module.exports = {
   uploadPfp,
+  createUser,
 };

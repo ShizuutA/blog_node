@@ -1,40 +1,13 @@
-var express = require('express');
-const session = require('express-session');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-const dbConfig = require("../config/db.config.js");
+const fetchController = require('../controllers/fetch');
 
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: dbConfig.HOST,
-    user: dbConfig.USER,
-    password: dbConfig.PASSWORD,
-    database: dbConfig.DB
+router.get('/', async function(req, res, next) {
+    const post_numbers = 2;
+    const { username, admin, pfpdata } = await fetchController.fetchSession(req, res);
+    const posts = await fetchController.fetchPosts(req, res, post_numbers);
+
+    res.render('index', { title: 'Home', posts: posts, username: username , admin: admin , pfpdata: pfpdata});
 });
-
-router.get('/', function(req, res, next) {
-  if (session.user) {
-    user = session.user;
-    if (session.pfpdata) {
-      pfpdata = session.pfpdata;
-    }
-    if (session.admin) {
-      admin = session.admin;
-    }
-    else {
-      admin = false;
-    }
-  }
-  else {
-    user = false;
-    admin = false;
-    pfpdata = '';
-  }
-
-  connection.query('SELECT * FROM posts ORDER BY ID DESC limit 2', function (error, results, fields) {
-    if (error) throw error;
-    res.render('index', { title: 'Home', posts: results, user: user , admin: admin , pfpdata: pfpdata});
-  });
-}
-);
 module.exports = router;
