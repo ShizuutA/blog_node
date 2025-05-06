@@ -55,6 +55,23 @@ const createPost = async (req, res) => {
   }
 };
 
+const createComment = async (req, res, postId) => {
+  const { content } = req.body;
+
+  try {
+    await Comments.create({
+      post_id: postId,
+      content: content,
+      date: new Date(),
+    });
+
+    res.redirect("/posts/" + postId);
+  } catch (error) {
+    console.error("Error creating comment:", error);
+    res.status(500).json({ message: "Error creating comment" });
+  }
+};
+
 const uploadPostImage = async (req, res, postId) => {
   try {
     if (req.files == undefined) {
@@ -146,5 +163,5 @@ module.exports = {
   uploadPostImage,
   createUser,
   createPost,
-  
+  createComment,
 };

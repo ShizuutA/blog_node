@@ -6,11 +6,11 @@ const upload = require('../middleware/upload');
 const fetchController = require('../controllers/fetch');
 const uploadController = require('../controllers/upload');
 
-router.get('/', upload.none() ,function(req, res, next) {
-    let { username, admin, pfpdata } = fetchController.fetchSession(req, res);
-
+router.get('/', async function(req, res, next) {
+    let { username, admin, pfpdata } = await fetchController.fetchSession(req, res);
+    console.log('Admin:', admin);
     if (username && admin) { 
-        res.render('createPost', { title: 'Create Post', username: username });
+        res.render('createPost', { title: 'Create Post', user: username, admin: admin, pfpdata: pfpdata });
     }
     else {
         res.redirect('/');
