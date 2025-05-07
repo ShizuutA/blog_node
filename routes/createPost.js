@@ -1,25 +1,23 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-const session = require('express-session');
+const upload = require('../middleware/upload');
 
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'cielpass',
-    database: 'Blog_Romain'
-});
+const fetchController = require('../controllers/fetch');
+const uploadController = require('../controllers/upload');
 
-
-router.get('/', function(req, res, next) {
-    if (session.user && session.admin) { 
-        user = session.user;
-        res.render('createPost', { title: 'Create Post', user: user });
+router.get('/', async function(req, res, next) {
+    let { username, admin, pfpdata } = await fetchController.fetchSession(req, res);
+    if (username && admin) { 
+        res.render('createPost', { title: 'Create Post', user: username, admin: admin, pfpdata: pfpdata });
     }
     else {
         res.redirect('/');
     }
+});
+
+router.post("/", upload.array('image') ,function(req, res) {
+    uploadController.createPost(req, res)
 });
 
 module.exports = router;

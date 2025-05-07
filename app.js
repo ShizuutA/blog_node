@@ -1,20 +1,32 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var session = require('express-session');
+const db = require("./models");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var loginRouter = require('./routes/login');
-var registerRouter = require('./routes/register');
-var logoutRouter = require('./routes/logout');
-var createPostRouter = require('./routes/createPost');
-var uploadRouter = require('./routes/upload');
+const session = require('express-session');
 
-var app = express();
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
+const logoutRouter = require('./routes/logout');
+const createPostRouter = require('./routes/createPost');
+const uploadRouter = require('./routes/upload');
+const postsRouter = require('./routes/posts');
+
+const app = express();
+
+global.__basedir = __dirname;
+
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,13 +45,7 @@ app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
 app.use('/createPost', createPostRouter);
 app.use('/upload', uploadRouter);
-
-app.use(session({
-  secret: 'secret',
-  user: false,
-  admin: false,
-  cookie: { secure: true }
-}));
+app.use('/posts', postsRouter);
 
 
 
@@ -53,5 +59,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+db.sequelize.sync({ force: false })
 
 module.exports = app;

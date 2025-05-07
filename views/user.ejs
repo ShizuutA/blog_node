@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Rabbit Hole</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/user.css" />
+    <link rel="stylesheet" href="/stylesheets/user-panel.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>The Rabbit Hole</h1>
+      </div> 
+      <% if (username) { %>
+        <div id="user-info">
+          <button id="user-nav-btn"><img src="<%= pfpdata %>" alt="<%= username  %>" class="pfp" ></button> <br>
+          <nav id="user-nav" >
+            <ul>
+              <li id="user-pfp"><img src='<%= pfpdata %>' alt="<%= username %>" class="pfp" /></li>
+              <li>
+                <a href="/logout">Logout</a>
+              </li>
+              <li><a href="/users/<%= username %>">Profile</a></li>
+              <% if (admin) { %>
+                <li><a href="/CreatePost">Create Post</a></li>
+              <% } %>
+          </nav>
+          
+        </div>
+        <% } %>
+      <div id="navbar">
+        <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <% if (!username) { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          <% } %>
+        </ul>
+      </nav>
+      </div>
+     
+      <hr>
+    </header>
+    <main>
+      <div></div>
+      <div id="user-container">
+        <div id="left-column">
+          <img src="<%= user['pfpdata'] %>" alt="<%= user['username']  %>" class="pfp_info" id="user-pfp_info" />
+          <h2><%= user['username']  %></h2>
+          <p><%= user['rights']  %></p>
+          <% if (user['about']) {%>
+            <p><%= user['about']  %></p>
+          <% } %>
+          <% if (userOwnPage) { %>
+            <div class="profile-settings" >
+              <a href="/users/<%= user['username'] %>/settings" >Edit profile</a>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </main>
+    <footer>
+      
+    </footer>
+    <script rel="js" src="/javascripts/user-side-pannel.js"></script>
+  </body>
+</html>

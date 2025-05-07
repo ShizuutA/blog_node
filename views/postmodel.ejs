@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Rabbit Hole</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/postmodel.css" />
+    <link rel="stylesheet" href="/stylesheets/user-panel.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>The Rabbit Hole</h1>
+      </div> 
+      <% if (user) { %>
+        <div id="user-info">
+          <button id="user-nav-btn"><img src="<%= pfpdata %>" alt="<%= user  %>" class="pfp" ></button> <br>
+          <nav id="user-nav" >
+            <ul>
+              <li id="user-pfp"><img src='<%= pfpdata %>' alt="<%= user %>" class="pfp" /></li>
+              <li>
+                <a href="/logout">Logout</a>
+              </li>
+              <li><a href="/users/<%= user %>">Profile</a></li>
+              <% if (admin) { %>
+                <li><a href="/CreatePost">Create Post</a></li>
+              <% } %>
+          </nav>
+          
+        </div>
+        <% } %>
+      <div id="navbar">
+        <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <% if (!user) { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          <% } %>
+        </ul>
+      </nav>
+      </div>
+      <hr>
+    </header>
+    <main>
+      <div id="blog-container">
+        <h2><%= post['title'] %></h2>
+        <div class="post-content">
+          <p><%= post['content'] %></p>
+        </div>
+      </div>
+      <div class="comments">
+        <% if (user) { %>
+        <form action="/posts/<%= post['ID'] %>" method="POST" id="comment-form">
+          <div class="form-container">
+            <textarea id="comment" name="comment" rows="4" cols="300" spellcheck='on' required></textarea>
+            <label for="comment">Comment</label>
+          </div>
+          <button type="submit">Post</button>
+        </form>
+        <% } else { %>
+        <div id="mustlogin">
+          <p>You must be logged in to leave a comment.</p>
+        </div>
+        <% } %> 
+        <% if (comments) { %>
+          <h3>Comments</h3>
+          <ul>
+             <% comments.forEach(comment => { %>
+            <li class="comment">
+              <h4><a href="/users/<%= comment['user'] %>"><%= comment['user']  %></a></h4>
+              <p><%= comment['content'] %></p>
+              <% if (admin) { %>
+              <form action="/posts/<%= post['ID'] %>/comments/<%= comment['ID'] %>" method="POST" class="delete-comment">
+                <button type="submit">Delete</button>
+              </form>
+              <% } %>
+            </li>
+          <% }) %>
+          <% } else { %>
+            <p>Be the first one to comment</p>
+         <% } %>
+          </ul>
+      </div>
+    </main>
+    <footer>
+    </footer>
+    <script rel="js" src="/javascripts/user-side-pannel.js"></script>
+  </body>
+</html>

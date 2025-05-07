@@ -1,0 +1,177 @@
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19-11.7.2-MariaDB, for Win64 (AMD64)
+--
+-- Host: localhost    Database: blog_romain
+-- ------------------------------------------------------
+-- Server version	11.7.2-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
+
+--
+-- Table structure for table `commentaires`
+--
+
+DROP TABLE IF EXISTS `commentaires`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `commentaires` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `user` varchar(255) NOT NULL,
+  `content` mediumtext NOT NULL,
+  `upvote` int(11) DEFAULT 0,
+  `downvote` int(11) DEFAULT 0,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `commentaires`
+--
+
+LOCK TABLES `commentaires` WRITE;
+/*!40000 ALTER TABLE `commentaires` DISABLE KEYS */;
+/*!40000 ALTER TABLE `commentaires` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `posts`
+--
+
+DROP TABLE IF EXISTS `posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `posts` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `preview` varchar(255) NOT NULL,
+  `content` mediumtext NOT NULL,
+  `date` datetime DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `posts`
+--
+
+LOCK TABLES `posts` WRITE;
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES
+(1,'The Power of Morning Routines: How to Win the Day by 9 AM','Master your morning to master your life. Learn how early habits shape success and boost productivity.','Many of the world’s most successful people swear by their morning routines. From CEOs to athletes, structured mornings help set the tone for a productive day. A good routine boosts mental clarity, reduces decision fatigue, and provides a sense of control.\r\n\r\nStart by waking up at the same time daily. Begin with hydration—water kickstarts your metabolism. Then, engage in physical activity, even if it’s just a 10-minute stretch. Meditation or journaling helps center your mind, while a healthy breakfast fuels your body. Plan your day ahead, listing top priorities.\r\n\r\nThe goal isn’t perfection but consistency. Over time, your morning becomes a launchpad, giving you a head start while the world is still waking up.','2025-05-06 18:54:02','2025-05-06 18:54:02','2025-05-06 18:54:02'),
+(2,' 7 Simple Budgeting Hacks That Actually Work','Struggling to manage money? These 7 budgeting hacks will help you take control of your finances without feeling restricted.','Budgeting doesn’t have to mean cutting out all the fun. In fact, it’s about aligning your spending with your values. Try the 50/30/20 rule: 50% for needs, 30% for wants, 20% for savings or debt.\r\n\r\nUse automatic transfers to move money into savings. Track your expenses with apps like Mint or YNAB. Round up purchases into savings with tools like Acorns. Try a no-spend weekend once a month and unsubscribe from marketing emails that tempt impulse buying.\r\n\r\nThe key is awareness. When you know where your money is going, you gain the power to redirect it toward your goals.\r\n\r\n','2025-05-06 18:55:18','2025-05-06 18:55:18','2025-05-06 18:55:18'),
+(3,'Digital Detox: Reclaim Your Time and Focus','Tired of screen fatigue? Discover how a digital detox can reset your brain, improve sleep, and boost creativity.','We check our phones over 100 times a day. Constant notifications, doom-scrolling, and screen time fragment our attention and wear us down.\r\n\r\nA digital detox doesn’t mean quitting tech forever—it’s about creating healthier boundaries. Start with screen-free hours, like the first hour after waking or before bed. Designate one day a week as a “tech Sabbath.” Use apps like Forest to stay focused and monitor screen time.\r\n\r\nYou’ll quickly notice deeper conversations, more mindful moments, and better sleep. Reclaiming your focus means reclaiming your life.\r\n\r\n','2025-05-06 18:56:05','2025-05-06 18:56:05','2025-05-06 18:56:05'),
+(4,'How to Start a Side Hustle in 2025','Want extra income or to pursue a passion? Here’s how to launch a profitable side hustle this year.','Side hustles are more accessible than ever. Whether it’s freelancing, selling products online, or creating content, there’s a niche for everyone.\r\n\r\nStart by identifying your skills and interests. Validate demand—use Google Trends or forums to see what people want. Then build a minimal version of your service or product. Promote through social media and word of mouth. Keep costs low by using free tools like Canva, Gumroad, and Substack.\r\n\r\nStart small, stay consistent, and iterate. With time and effort, your side hustle could become your main gig—or a reliable income stream on the side.\r\n\r\n','2025-05-06 18:56:31','2025-05-06 18:56:31','2025-05-06 18:56:31'),
+(5,'Meal Prepping for Busy People: Save Time and Eat Healthier','Tired of takeout? Meal prepping can help you eat better, save time, and reduce stress in the kitchen.','Meal prepping isn’t just for fitness enthusiasts—it’s for anyone who wants to make food one less thing to worry about. Start by planning your meals for the week. Choose simple, versatile ingredients: grains, proteins, veggies.\r\n\r\nBatch cook on Sundays. Invest in good containers and label meals by day. Try themes like “Meatless Monday” or “Taco Tuesday” to simplify planning. Freeze extras for emergencies.\r\n\r\nMeal prepping reduces decision fatigue and helps you avoid unhealthy last-minute choices. You’ll save money, reduce waste, and feel more in control of your nutrition.\r\n\r\n','2025-05-06 18:56:56','2025-05-06 18:56:56','2025-05-06 18:56:56'),
+(6,'Decluttering Your Home, Decluttering Your Mind','A tidy space is a tidy mind. Learn how decluttering your environment can improve focus, mood, and mental health.\r\n\r\n','Physical clutter often reflects mental clutter. When our environment is chaotic, it’s harder to focus, relax, or feel at peace.\r\n\r\nStart small: a single drawer, a closet, a corner of the room. Use the “one in, one out” rule to prevent re-cluttering. Ask yourself: Does this item bring value or joy? If not, let it go.\r\n\r\nDecluttering is more than tidying—it’s choosing what deserves space in your life. You’ll find that as your home becomes clearer, your mind follows suit.\r\n\r\n','2025-05-06 18:57:24','2025-05-06 18:57:24','2025-05-06 18:57:24'),
+(7,'The Beginner’s Guide to Mindfulness Meditation',' Mindfulness isn’t just hype. Here’s how 10 minutes a day can lower stress, improve focus, and rewire your brain.','Mindfulness is the practice of being fully present in the moment without judgment. It’s simple but powerful—and backed by neuroscience.\r\n\r\nTo start, find a quiet place. Sit comfortably. Focus on your breath. When your mind wanders (and it will), gently bring it back. Start with just 5–10 minutes a day.\r\n\r\nApps like Headspace and Insight Timer can guide you. Over time, you’ll notice less reactivity, better concentration, and more emotional resilience.\r\n\r\nMindfulness is like a mental gym. The more you practice, the stronger your mind becomes.\r\n\r\n','2025-05-06 18:57:46','2025-05-06 18:57:46','2025-05-06 18:57:46');
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `postsimages`
+--
+
+DROP TABLE IF EXISTS `postsimages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `postsimages` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `imgname` varchar(255) DEFAULT NULL,
+  `imgdata` longblob NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `postsimages`
+--
+
+LOCK TABLES `postsimages` WRITE;
+/*!40000 ALTER TABLE `postsimages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `postsimages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reactions`
+--
+
+DROP TABLE IF EXISTS `reactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reactions` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `heart` int(11) DEFAULT NULL,
+  `fire` int(11) DEFAULT NULL,
+  `star` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reactions`
+--
+
+LOCK TABLES `reactions` WRITE;
+/*!40000 ALTER TABLE `reactions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reactions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `pfpname` varchar(255) DEFAULT NULL,
+  `pfpdata` longblob DEFAULT NULL,
+  `rights` enum('Member','Admin') DEFAULT 'Member',
+  `about` mediumtext DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES
+('Romain','7110eda4d09e062aa5e4a390b0a572ac0d2c0220','images.jpg','data:image/jpeg;base64,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','Admin','','2025-05-05 17:12:38','2025-05-05 21:22:37');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
+
+-- Dump completed on 2025-05-06 21:03:08
