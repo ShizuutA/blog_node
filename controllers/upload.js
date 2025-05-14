@@ -112,25 +112,19 @@ const uploadPfp = async (req, res, username) => {
       return res.send(`You must select a file.`);
     }
 
-    const filePath = __basedir + "/resources/static/assets/uploads/" + req.file.filename;
+    const filePath = __basedir + "/resources/static/assets/uploads/" + username + ".jpg";
+    fs.writeFileSync(filePath, req.file.buffer);
     const imgData = fs.readFileSync(filePath).toString("base64");
     const uri = "data:" + req.file.mimetype + ";base64," + imgData;
     await Users.update(
       {
-        pfpname: req.file.originalname,
+        pfpname: username + ".jpg",
         pfpdata: uri,
       },
       {
         where: { username: username },
       }
     )
-    fs.unlink(filePath, (err) => {
-      if (err) {
-        console.error("Error deleting file:", err);
-      } else {
-        console.log("File deleted successfully");
-      }
-    });
     session.pfpdata = uri;
   } catch (error) {
     console.log(error);

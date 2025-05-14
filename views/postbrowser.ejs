@@ -57,6 +57,17 @@
           <% }) %>
         </ul>
       </div>
+      <div class="page">
+        <div class="page-number">
+          <% if (page > 1) { %>
+            <a href="/posts?page=<%= page - 1 %>">Previous</a>
+          <% } %>
+          <span>Page <%= page %></span>
+          <% if (page <= limit) { %>
+            <a href="/posts?page=<%= page + 1 %>">Next</a>
+          <% } %>
+        </div>
+    </div>
     </main>
     <footer>
     </footer>

@@ -29,6 +29,13 @@ const fetchPosts = async (req, res, post_numbers, offset) => {
     return posts;
 }
 
+const fetchPostsPageLimit = async (req, res) => {
+    let posts = await Posts.findAll({
+        order: [['ID', 'DESC']],
+    });
+    return posts.length;
+}
+
 const fetchPost = async (req, res, post_id) => {
     let post = await Posts.findOne({
         where: {
@@ -82,4 +89,5 @@ module.exports = {
     fetchUsers,
     fetchUser,
     userOwnPage,
+    fetchPostsPageLimit
 };

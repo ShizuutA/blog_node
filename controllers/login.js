@@ -15,7 +15,8 @@ const loginUser = async (req, res) => {
     }
     req.session.username = user.username;
     req.session.rights = user.rights;
-    req.session.pfpdata = user.pfpdata;
+    req.session.pfpdata = user["pfpdata"];
+    
   } catch (error) {
     console.error("Error logging in user:", error);
     return res.status(500).json({ message: "Error logging in user" });

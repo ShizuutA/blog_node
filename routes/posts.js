@@ -43,12 +43,12 @@ router.get('/', async function(req, res, next) {
     if (pagenumber < 1) {
         return res.redirect('/posts?page=1');
     }
-
+    const postsPageLimit = await fetchController.fetchPostsPageLimit(req, res)/5;
     const posts = await fetchController.fetchPosts(req, res, limit, offset);
     if (!posts) {
         return res.status(404).render('404', { title: 'Posts Not Found' });
     }
-    res.render('postbrowser', {user: username , pfpdata: pfpdata ,admin: admin, posts: posts });
+    res.render('postbrowser', {user: username , pfpdata: pfpdata ,admin: admin, posts: posts , page: pagenumber, limit: postsPageLimit});
 });
 
 router.post('/:postID/comments/:commentID', async function(req, res, next) {
