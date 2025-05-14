@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
         content: {
-          type: DataTypes.TEXT('medium'),
+          type: DataTypes.STRING(255),
           allowNull: false,
         },
         upvote: {

@@ -55,13 +55,14 @@ const createPost = async (req, res) => {
   }
 };
 
-const createComment = async (req, res, postId) => {
-  const { content } = req.body;
-
+const createComment = async (req, res, postId, username) => {
+  const { comment } = req.body;
+  
   try {
     await Comments.create({
       post_id: postId,
-      content: content,
+      user: username,
+      content: comment,
       date: new Date(),
     });
 
@@ -111,26 +112,17 @@ const uploadPfp = async (req, res, username) => {
       return res.send(`You must select a file.`);
     }
 
-    const filePath = __basedir + "/resources/static/assets/uploads/" + req.file.filename;
-    const imgData = fs.readFileSync(filePath).toString("base64");
-    const uri = "data:" + req.file.mimetype + ";base64," + imgData;
+    const filePath = "/u/" + username + ".jpg";
     await Users.update(
       {
-        pfpname: req.file.originalname,
-        pfpdata: uri,
+        pfpname: username + ".jpg",
+        pfpdata: filePath,
       },
       {
         where: { username: username },
       }
     )
-    fs.unlink(filePath, (err) => {
-      if (err) {
-        console.error("Error deleting file:", err);
-      } else {
-        console.log("File deleted successfully");
-      }
-    });
-    session.pfpdata = uri;
+    req.session.pfpdata = filePath;
   } catch (error) {
     console.log(error);
     return res.send(`Error when trying upload images: ${error}`);

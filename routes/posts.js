@@ -3,6 +3,7 @@ const router = express.Router();
 
 const fetchController = require("../controllers/fetch");
 const uploadController = require("../controllers/upload");
+const deleteController = require("../controllers/delete");
 
 router.get('/:postID', async function(req, res, next) {
     const postID = req.params.postID;
@@ -25,7 +26,7 @@ router.post('/:postID', async function(req, res, next) {
     if (!username) {
         return res.redirect('/posts/' + postID);
     }
-    uploadController.uploadComment(req, res, postID);
+    uploadController.createComment(req, res, postID, username);
 });
 
 
@@ -42,13 +43,22 @@ router.get('/', async function(req, res, next) {
     if (pagenumber < 1) {
         return res.redirect('/posts?page=1');
     }
-
+    const postsPageLimit = await fetchController.fetchPostsPageLimit(req, res)/5;
     const posts = await fetchController.fetchPosts(req, res, limit, offset);
     if (!posts) {
         return res.status(404).render('404', { title: 'Posts Not Found' });
     }
-    res.render('postbrowser', {user: username , admin: admin, posts: posts });
+    res.render('postbrowser', {user: username , pfpdata: pfpdata ,admin: admin, posts: posts , page: pagenumber, limit: postsPageLimit});
 });
 
+router.post('/:postID/comments/:commentID', async function(req, res, next) {
+    const postID = req.params.postID;
+    const commentID = req.params.commentID;
+    const { username, admin, pfpdata } = await fetchController.fetchSession(req, res);
+    if (!admin) {
+        return res.redirect('/posts/' + postID);
+    }
+    deleteController.delComment(req, res, postID, commentID);
+});
 
 module.exports = router;

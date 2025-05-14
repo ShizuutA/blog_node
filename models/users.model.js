@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(255),
       },
       pfpdata: {
-        type: DataTypes.BLOB('long'),
+        type: DataTypes.STRING(255),
       },
       rights: {
         type: DataTypes.ENUM('Member', 'Admin'),

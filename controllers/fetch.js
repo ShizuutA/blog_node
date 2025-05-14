@@ -3,12 +3,10 @@ const Posts = db.posts;
 const Users = db.users;
 const Comments = db.comments;
 
-const session = require("express-session");
-
 const fetchSession = async (req, res) => {
-    let username = session.username;
-    let admin = session.rights;
-    let pfpdata = session.pfpdata;
+    let username = req.session.username;
+    let admin = req.session.rights;
+    let pfpdata = req.session.pfpdata;
 
     if (admin != 'Admin') {
         admin = false;
@@ -29,6 +27,13 @@ const fetchPosts = async (req, res, post_numbers, offset) => {
 
     });
     return posts;
+}
+
+const fetchPostsPageLimit = async (req, res) => {
+    let posts = await Posts.findAll({
+        order: [['ID', 'DESC']],
+    });
+    return posts.length;
 }
 
 const fetchPost = async (req, res, post_id) => {
@@ -75,6 +80,16 @@ const userOwnPage = async (req, res, username, user) => {
     }
 }
 
+const fetchUserComments = async (req, res, username) => {
+    let comments = await Comments.findAll({
+        where: {
+            username: username,
+        },
+        order: [['ID', 'DESC']],
+    });
+    return comments;
+}
+
 
 module.exports = {
     fetchSession,
@@ -84,4 +99,6 @@ module.exports = {
     fetchUsers,
     fetchUser,
     userOwnPage,
+    fetchPostsPageLimit,
+    fetchUserComments,
 };

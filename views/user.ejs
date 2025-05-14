@@ -20,9 +20,7 @@
             <ul>
               <li id="user-pfp"><img src='<%= pfpdata %>' alt="<%= username %>" class="pfp" /></li>
               <li>
-                <form action="/logout" method="POST">
-                  <button type="submit">Logout</button>
-                </form>
+                <a href="/logout">Logout</a>
               </li>
               <li><a href="/users/<%= username %>">Profile</a></li>
               <% if (admin) { %>

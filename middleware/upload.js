@@ -13,7 +13,8 @@ var storage = multer.diskStorage({
     cb(null, __basedir + "/resources/static/assets/uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}${file.originalname}`);
+    let username = req.session.username;
+    cb(null, `${username}.jpg`);
   },
 });
 

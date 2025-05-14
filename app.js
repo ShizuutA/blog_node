@@ -21,6 +21,13 @@ const app = express();
 
 global.__basedir = __dirname;
 
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -40,14 +47,7 @@ app.use('/createPost', createPostRouter);
 app.use('/upload', uploadRouter);
 app.use('/posts', postsRouter);
 
-app.use(session({
-  secret: 'secret',
-  username: false,
-  admin: false,
-  pfpdata: false,
-  cookie: { secure: true }
-}));
-
+app.use('/u', express.static(path.join(__dirname, 'resources/static/assets/uploads')));
 
 
 // error handler

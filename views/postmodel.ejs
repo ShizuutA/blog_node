@@ -20,9 +20,7 @@
             <ul>
               <li id="user-pfp"><img src='<%= pfpdata %>' alt="<%= user %>" class="pfp" /></li>
               <li>
-                <form action="/logout" method="POST">
-                  <button type="submit">Logout</button>
-                </form>
+                <a href="/logout">Logout</a>
               </li>
               <li><a href="/users/<%= user %>">Profile</a></li>
               <% if (admin) { %>
@@ -71,8 +69,13 @@
           <ul>
              <% comments.forEach(comment => { %>
             <li class="comment">
-              <h4><%= comment['user']  %></h4>
+              <h4><a href="/users/<%= comment['user'] %>"><%= comment['user']  %></a></h4>
               <p><%= comment['content'] %></p>
+              <% if (admin) { %>
+              <form action="/posts/<%= post['ID'] %>/comments/<%= comment['ID'] %>" method="POST" class="delete-comment">
+                <button type="submit">Delete</button>
+              </form>
+              <% } %>
             </li>
           <% }) %>
           <% } else { %>
