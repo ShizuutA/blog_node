@@ -60,6 +60,21 @@
             </div>
           <% } %>
         </div>
+        <div class="user-comments">
+          <h2>Comments</h2>
+          <% if (userComments.length > 0) { %>
+            <ul>
+              <% userComments.forEach(function(comment) { %>
+                <li class="comment">
+                  <p><%= comment['content'] %></p>
+                  <a href="/posts/<%= comment['post_id'] %>">redirect to post</a>
+                </li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <p>No comments yet.</p>
+          <% } %>
+        </div>
       </div>
     </main>
     <footer>

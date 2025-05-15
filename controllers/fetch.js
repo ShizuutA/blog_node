@@ -55,6 +55,15 @@ const fetchComments = async (req, res, post_id) => {
     return comments;
 }
 
+const fetchComment = async (req, res, comment_id) => {
+    let comment = await Comments.findOne({
+        where: {
+            ID: comment_id,
+        },
+    });
+    return comment;
+}
+
 const fetchUsers = async (req, res) => {
     let users = await Users.findAll({
         order: [['ID', 'DESC']],
@@ -80,6 +89,16 @@ const userOwnPage = async (req, res, username, user) => {
     }
 }
 
+const fetchUserComments = async (req, res, username) => {
+    let comments = await Comments.findAll({
+        where: {
+            user: username,
+        },
+        order: [['ID', 'DESC']],
+    });
+    return comments;
+}
+
 
 module.exports = {
     fetchSession,
@@ -89,5 +108,7 @@ module.exports = {
     fetchUsers,
     fetchUser,
     userOwnPage,
-    fetchPostsPageLimit
+    fetchPostsPageLimit,
+    fetchUserComments,
+    fetchComment,
 };

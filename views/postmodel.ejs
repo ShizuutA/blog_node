@@ -71,7 +71,7 @@
             <li class="comment">
               <h4><a href="/users/<%= comment['user'] %>"><%= comment['user']  %></a></h4>
               <p><%= comment['content'] %></p>
-              <% if (admin) { %>
+              <% if (admin || user == comment['user']) { %>
               <form action="/posts/<%= post['ID'] %>/comments/<%= comment['ID'] %>" method="POST" class="delete-comment">
                 <button type="submit">Delete</button>
               </form>

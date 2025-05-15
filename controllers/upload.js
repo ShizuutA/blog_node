@@ -2,8 +2,6 @@ const fs = require("fs");
 
 const sha1 = require('js-sha1');
 
-const generateAvatar = require("../middleware/generateAvatar");
-
 const db = require("../models");
 const session = require("express-session");
 const Users = db.users;
@@ -18,12 +16,12 @@ const createUser = async (req, res) => {
   if (password !== confirmpassword) {
     return res.status(400).json({ message: "Passwords do not match" });
   }
-  let pfpdata = generateAvatar(username);
+  let defaultAvatar = "/u/default-pfp.jpg";
   try {
     const user = await Users.create({
       username: username,
       password: hashedPassword,
-      pfpdata: pfpdata,
+      pfpdata: defaultAvatar,
     });
 
     res.redirect("/login");
@@ -112,20 +110,17 @@ const uploadPfp = async (req, res, username) => {
       return res.send(`You must select a file.`);
     }
 
-    const filePath = __basedir + "/resources/static/assets/uploads/" + username + ".jpg";
-    fs.writeFileSync(filePath, req.file.buffer);
-    const imgData = fs.readFileSync(filePath).toString("base64");
-    const uri = "data:" + req.file.mimetype + ";base64," + imgData;
+    const filePath = "/u/" + username + ".jpg";
     await Users.update(
       {
         pfpname: username + ".jpg",
-        pfpdata: uri,
+        pfpdata: filePath,
       },
       {
         where: { username: username },
       }
     )
-    session.pfpdata = uri;
+    req.session.pfpdata = filePath;
   } catch (error) {
     console.log(error);
     return res.send(`Error when trying upload images: ${error}`);

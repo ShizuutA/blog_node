@@ -55,7 +55,8 @@ router.post('/:postID/comments/:commentID', async function(req, res, next) {
     const postID = req.params.postID;
     const commentID = req.params.commentID;
     const { username, admin, pfpdata } = await fetchController.fetchSession(req, res);
-    if (!admin) {
+    const comment = await fetchController.fetchComment(req, res, commentID);
+    if (!admin && username !== comment['user']) {
         return res.redirect('/posts/' + postID);
     }
     deleteController.delComment(req, res, postID, commentID);

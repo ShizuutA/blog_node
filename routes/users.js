@@ -14,13 +14,14 @@ router.get('/:profileUsername', async function(req, res, next) {
         const { profileUsername } = req.params;
         const { username , admin, pfpdata } = await fetchController.fetchSession(req, res);
         const user = await fetchController.fetchUser(req, res, profileUsername);
+        const userComments = await fetchController.fetchUserComments(req, res, profileUsername);
         const userOwnPage = (username === user.username);
 
         if (!user) {
             return res.status(404).render('404', { title: 'User Not Found' });
         }
 
-        res.render('user', { user: user, admin: admin, username: username, pfpdata: pfpdata, userOwnPage: userOwnPage });
+        res.render('user', { user: user, admin: admin, username: username, pfpdata: pfpdata, userOwnPage: userOwnPage, userComments: userComments });
     }
     catch (error) {
         console.error('Error fetching user:', error);

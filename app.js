@@ -47,6 +47,7 @@ app.use('/createPost', createPostRouter);
 app.use('/upload', uploadRouter);
 app.use('/posts', postsRouter);
 
+app.use('/u', express.static(path.join(__dirname, 'resources/static/assets/uploads')));
 
 
 // error handler
